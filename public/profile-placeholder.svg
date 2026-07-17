@@ -1,0 +1,11 @@
+<svg width="480" height="560" viewBox="0 0 480 560" xmlns="http://www.w3.org/2000/svg">
+  <rect width="480" height="560" fill="#1a1c21"/>
+  <rect x="0.5" y="0.5" width="479" height="559" fill="none" stroke="#2a2d33" stroke-width="1"/>
+  <text x="240" y="300" text-anchor="middle" font-family="monospace" font-size="22" fill="#9297a3">
+    /public/profile.jpg
+  </text>
+  <text x="240" y="332" text-anchor="middle" font-family="monospace" font-size="14" fill="#5a5f68">
+    replace this file with your photo
+  </text>
+  <circle cx="240" cy="220" r="46" fill="none" stroke="#ffc93c" stroke-width="2" stroke-dasharray="4 6"/>
+</svg>
