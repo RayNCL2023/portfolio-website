@@ -4,20 +4,20 @@
 // ─────────────────────────────────────────────────────────────
 
 export const profile = {
-  name: "Jordan Ellis",
+  name: "Debanjan Ray",
   role: "MSc Advanced Computer Science @ University of Manchester",
   status: "~/portfolio — building in AI, summer 2026",
   tagline:
-    "I build small, working things in machine learning — then write clearly about how they work.",
+    "I build small, working things in machine learning - then write clearly about how they work.",
   bio: `Recent First Class Honours graduate in Computer Science from Newcastle
 University, now starting an MSc in Advanced Computer Science at Manchester.
 I care about the gap between "a model that works in a notebook" and "a
-system you can actually ship" — this summer I'm closing that gap by building
+system you can actually ship" - this summer I'm closing that gap by building
 in public, one project at a time.`,
   location: "Manchester, UK",
-  email: "your.email@example.com",
-  github: "https://github.com/your-username",
-  linkedin: "https://linkedin.com/in/your-username",
+  email: "debanjanr2019@gmail.com",
+  github: "https://github.com/RayNCL2023",
+  linkedin: "www.linkedin.com/in/debanjan-ray-b4785a335",
   resumeUrl: "/resume.pdf",
   // Get a free access key at https://web3forms.com (no backend needed)
   web3formsAccessKey: "YOUR_WEB3FORMS_ACCESS_KEY",
