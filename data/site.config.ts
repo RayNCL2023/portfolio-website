@@ -9,18 +9,14 @@ export const profile = {
   status: "~/portfolio — building in AI, summer 2026",
   tagline:
     "I build small, working things in machine learning - then write clearly about how they work.",
-  bio: `Recent First Class Honours graduate in Computer Science from Newcastle
-University, now starting an MSc in Advanced Computer Science at Manchester.
-I care about the gap between "a model that works in a notebook" and "a
-system you can actually ship" - this summer I'm closing that gap by building
-in public, one project at a time.`,
+  bio: `Recent First Class Honours graduate in Computer Science from Newcastle University, now starting an MSc in Advanced Computer Science at Manchester. I care about the gap between "a model that works in a notebook" and "a system you can actually ship" - this summer I'm closing that gap by building in public, one project at a time.`,
   location: "Manchester, UK",
   email: "debanjanr2019@gmail.com",
   github: "https://github.com/RayNCL2023",
   linkedin: "https://www.linkedin.com/in/debanjan-ray-b4785a335",
   resumeUrl: "/resume.pdf",
   // Get a free access key at https://web3forms.com (no backend needed)
-  web3formsAccessKey: "YOUR_WEB3FORMS_ACCESS_KEY",
+  web3formsAccessKey: "74086f76-a50d-440c-a4a1-14419ed0737f",
 };
 
 export const skills = [
