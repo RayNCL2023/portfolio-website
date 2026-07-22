@@ -17,7 +17,7 @@ in public, one project at a time.`,
   location: "Manchester, UK",
   email: "debanjanr2019@gmail.com",
   github: "https://github.com/RayNCL2023",
-  linkedin: "www.linkedin.com/in/debanjan-ray-b4785a335",
+  linkedin: "https://www.linkedin.com/in/debanjan-ray-b4785a335",
   resumeUrl: "/resume.pdf",
   // Get a free access key at https://web3forms.com (no backend needed)
   web3formsAccessKey: "YOUR_WEB3FORMS_ACCESS_KEY",
