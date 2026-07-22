@@ -14,7 +14,7 @@ export const profile = {
   email: "debanjanr2019@gmail.com",
   github: "https://github.com/RayNCL2023",
   linkedin: "https://www.linkedin.com/in/debanjan-ray-b4785a335",
-  cvUrl: "/Debanjan_Ray_CV.pdf",
+  cvUrl: "/Debanjan-Ray-CV.pdf",
   // Get a free access key at https://web3forms.com (no backend needed)
   web3formsAccessKey: "74086f76-a50d-440c-a4a1-14419ed0737f",
 };
