@@ -29,12 +29,12 @@ export default function Nav() {
         </ul>
         <div className="flex items-center gap-5">
           <a
-            href={profile.resumeUrl}
+            href={profile.cvUrl}
             target="_blank"
             rel="noreferrer"
             className="hidden sm:inline font-mono text-sm text-ink-muted hover:text-ink transition-colors"
           >
-            Resume
+            CV
           </a>
           <a
             href="#contact"
