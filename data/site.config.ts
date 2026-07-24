@@ -9,7 +9,7 @@ export const profile = {
   status: "~/portfolio — building in AI, summer 2026",
   tagline:
     "Building AI projects, running experiments, and figuring out what actually works.",
-  bio: `Recent First Class Honours graduate in Computer Science from Newcastle University, now starting an MSc in Advanced Computer Science at Manchester. I care about the gap between "a model that works in a notebook" and "a system you can actually ship" - this summer I'm closing that gap by building in public, one project at a time.`,
+  bio: "I'm a recent First-Class Computer Science graduate from Newcastle University, starting an MSc in Advanced Computer Science at the University of Manchester. I'm interested in building practical AI applications, exploring new ideas, and learning by creating projects from scratch. This site is where I document that journey.",
   location: "Manchester, UK",
   email: "debanjanr2019@gmail.com",
   github: "https://github.com/RayNCL2023",
