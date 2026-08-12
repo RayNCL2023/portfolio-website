@@ -1,7 +1,18 @@
 # Your Portfolio Site
 
 A single-page portfolio built with Next.js, TypeScript, and Tailwind CSS.
-Dark neutral base, amber accent, Space Grotesk / Inter / IBM Plex Mono type.
+Warm near-white base, one signal accent, exposed column grid.
+Switzer (display) / General Sans (body) / IBM Plex Mono (labels).
+
+### Changing the accent colour
+
+Every accent in the site resolves from a single attribute. In
+`app/layout.tsx`, change `data-accent` on the `<html>` element to one of
+`signal` (red), `cobalt` (deep blue), or `electric` (bright blue). The
+palettes themselves live at the top of `app/globals.css`.
+
+Open `/preview` in dev to compare all three against the real hero. That
+route is unlinked and `noindex`; delete `app/preview/` once you've decided.
 
 ## 1. Run it locally
 
@@ -81,8 +92,16 @@ app/
   layout.tsx      → fonts, page metadata
   page.tsx         → assembles the sections below
   globals.css      → color/type/motion design tokens
+app/
+  fonts/           → self-hosted Switzer + General Sans (woff2)
+  preview/         → accent comparison route (dev tool, unlinked)
 components/
-  Nav, Hero, About, Projects, Contact, Footer, ProfilePhoto, Reveal
+  Nav, Hero, About, Projects, Contact, Footer, ProfilePhoto
+  Reveal           → scroll reveals (Framer Motion + Intersection Observer)
+  CountUp          → metrics that count up when scrolled into view
+  GridLines        → exposed column hairlines
+  Brackets         → corner crop marks
+  SectionMarker    → numbered section labels ("01 — ABOUT")
 data/
   site.config.ts   → ← all your editable content lives here
 public/

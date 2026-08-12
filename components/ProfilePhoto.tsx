@@ -1,14 +1,19 @@
 "use client";
 
 import { useState } from "react";
+import Brackets from "./Brackets";
 
 export default function ProfilePhoto() {
   const [errored, setErrored] = useState(false);
 
   return (
-    <div className="relative w-full max-w-sm mx-auto lg:mx-0">
-      <div className="absolute -inset-3 border border-accent/40 rounded-2xl pointer-events-none hidden sm:block" />
-      <div className="relative aspect-[6/7] rounded-2xl overflow-hidden border border-border bg-bg-elevated">
+    <figure className="relative w-full max-w-[22rem] mx-auto lg:mx-0 lg:ml-auto">
+      <div className="relative aspect-[5/6] border border-rule bg-paper-sunk">
+        {/* Registration marks sit just outside the image frame, like crop
+            marks on a print proof — they bracket the image alone, not the
+            caption, so overflow stays visible here. */}
+        <Brackets size={11} inset={-9} />
+
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={errored ? "/profile-placeholder.svg" : "/profile.jpg"}
@@ -17,6 +22,11 @@ export default function ProfilePhoto() {
           className="h-full w-full object-cover"
         />
       </div>
-    </div>
+
+      <figcaption className="mt-3 flex items-center justify-between label-sm text-ink-faint">
+        <span>FIG.01</span>
+        <span>PORTRAIT</span>
+      </figcaption>
+    </figure>
   );
 }
