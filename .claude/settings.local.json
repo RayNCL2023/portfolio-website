@@ -2,7 +2,15 @@
   "permissions": {
     "allow": [
       "Bash(npx tsc *)",
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" --max-time 12 \"https://api.fontshare.com/v2/css?f[]=general-sans@400,500\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" --max-time 12 \"https://registry.npmjs.org/motion\")",
+      "Bash(curl -s --max-time 15 \"https://api.fontshare.com/v2/css?f%5B%5D=general-sans@400,500,600,700&f%5B%5D=switzer@700,800,900\")",
+      "Bash(node -e \"console.log\\('motion:', require\\('./node_modules/motion/package.json'\\).version\\)\")",
+      "Bash(npm run *)",
+      "PowerShell($p = Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess -Unique; if \\($p\\) { $p | ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue }; \"killed $p\" } else { \"none\" })",
+      "Bash(npx eslint *)",
+      "PowerShell($p = Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess -Unique; if \\($p\\) { $p | ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue } }; Start-Sleep -Seconds 2; \"dev stopped\")"
     ]
   }
 }

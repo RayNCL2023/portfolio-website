@@ -1,29 +1,287 @@
 @import "tailwindcss";
 
-@theme inline {
-  --color-bg: #121316;
-  --color-bg-elevated: #1a1c21;
-  --color-bg-elevated-2: #202329;
-  --color-ink: #edeef0;
-  --color-ink-muted: #9297a3;
-  --color-accent: #ffc93c;
-  --color-accent-soft: #3a3212;
-  --color-accent-ink: #16130a;
-  --color-border: #2a2d33;
-  --color-border-soft: #202329;
+/* ─────────────────────────────────────────────────────────────
+   DESIGN TOKENS
+   Light instrument-panel theme. Three type layers, one accent.
+   Accent is swapped by setting data-accent on <html>.
+   ───────────────────────────────────────────────────────────── */
 
-  --font-display: var(--font-display);
-  --font-sans: var(--font-body);
-  --font-mono: var(--font-mono);
+:root {
+  /* ── Surface ──────────────────────────────────────────────
+     Warm near-white. Never pure #FFF — the warmth is what keeps
+     it from reading clinical. Elevated is *lighter* than paper,
+     which is the light-theme inversion of the old dark scheme. */
+  --paper: #f7f6f3;
+  --paper-raised: #fdfcfa;
+  --paper-sunk: #f0efea;
 
-  --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  --animate-blink: blink 1.1s step-end infinite;
+  /* ── Ink ──────────────────────────────────────────────────
+     Near-black, not #000 — softer at 140px. Muted greys carry a
+     touch of the paper's warmth so nothing reads blue-grey. */
+  --ink: #0a0a0a;
+  --ink-soft: #38383a;
+  --ink-muted: #6b6b68;
+  --ink-faint: #a3a29d;
+
+  /* ── Structure ────────────────────────────────────────────
+     Hairlines are the whole Nothing move: 1px, low contrast,
+     always visible, never decorative. */
+  --rule: rgba(10, 10, 10, 0.1);
+  --rule-soft: rgba(10, 10, 10, 0.06);
+  --rule-strong: rgba(10, 10, 10, 0.2);
+  --dot: rgba(10, 10, 10, 0.14);
+
+  /* ── Accent (default: signal red) ─────────────────────────
+     Overridden by [data-accent]. Referenced everywhere as
+     var(--accent) so the whole site re-skins from one attribute. */
+  --accent: #ff3b30;
+  --accent-ink: #ffffff;
+  --accent-tint: rgba(255, 59, 48, 0.08);
+  --accent-line: rgba(255, 59, 48, 0.35);
+
+  /* ── Motion ───────────────────────────────────────────────
+     One easing curve for the entire site. */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+  --dur-fast: 200ms;
+  --dur: 500ms;
+  --dur-slow: 900ms;
+
+  /* ── Rhythm ───────────────────────────────────────────────
+     Generous vertical padding. On white, whitespace is the
+     premium signal; hairlines stop it reading as empty. */
+  --section-y: clamp(6rem, 13vw, 15rem);
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --shell: 84rem;
+
+  /* ── Type scale ───────────────────────────────────────────
+     Display tops out at 140px, tracks tight and negative. */
+  --display-1: clamp(3rem, 10.5vw, 8.75rem);
+  --display-2: clamp(2.25rem, 5.5vw, 4.5rem);
+  --display-3: clamp(1.5rem, 2.6vw, 2.25rem);
+  --track-display: -0.04em;
+  --track-display-tight: -0.05em;
+  --track-display-loose: -0.03em;
 }
 
-@keyframes fade-up {
+/* Signal red — closest to the Nothing reference. Sharp, technical. */
+[data-accent="signal"] {
+  --accent: #ff3b30;
+  --accent-ink: #ffffff;
+  --accent-tint: rgba(255, 59, 48, 0.08);
+  --accent-line: rgba(255, 59, 48, 0.35);
+}
+
+/* Deep cobalt — as specified. Quieter, reads institutional. */
+[data-accent="cobalt"] {
+  --accent: #1e3a8a;
+  --accent-ink: #ffffff;
+  --accent-tint: rgba(30, 58, 138, 0.07);
+  --accent-line: rgba(30, 58, 138, 0.35);
+}
+
+/* Electric blue — the brighter reading of "systems engineering". */
+[data-accent="electric"] {
+  --accent: #2563eb;
+  --accent-ink: #ffffff;
+  --accent-tint: rgba(37, 99, 235, 0.08);
+  --accent-line: rgba(37, 99, 235, 0.35);
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-raised: var(--paper-raised);
+  --color-paper-sunk: var(--paper-sunk);
+
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+
+  --color-rule: var(--rule);
+  --color-rule-soft: var(--rule-soft);
+  --color-rule-strong: var(--rule-strong);
+
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-tint: var(--accent-tint);
+  --color-accent-line: var(--accent-line);
+
+  /* Three families, three jobs. Never mixed within one line. */
+  --font-display: var(--font-switzer);
+  --font-sans: var(--font-general-sans);
+  --font-mono: var(--font-plex-mono);
+
+  --ease-signal: var(--ease);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   BASE
+   ───────────────────────────────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+  /* Anchor targets clear the fixed nav. */
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   TYPE LAYER UTILITIES
+   Each utility bundles family + size + tracking so the three
+   layers can't drift apart or get mixed by accident.
+   ───────────────────────────────────────────────────────────── */
+
+/* LABEL LAYER — mono. Eyebrows, section numbers, metadata,
+   status readouts. Nothing else ever uses mono. */
+@utility label {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.6875rem;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+@utility label-sm {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.625rem;
+  line-height: 1;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Metrics share the mono layer — they are readouts, not prose. */
+@utility metric {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* DISPLAY LAYER — Switzer, heavy weights only. */
+@utility display-1 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: var(--display-1);
+  line-height: 0.88;
+  letter-spacing: var(--track-display-tight);
+}
+
+@utility display-2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--display-2);
+  line-height: 0.95;
+  letter-spacing: var(--track-display);
+}
+
+@utility display-3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--display-3);
+  line-height: 1.08;
+  letter-spacing: var(--track-display-loose);
+}
+
+/* BODY LAYER — General Sans. Quiet by design. */
+@utility body-lg {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
+  line-height: 1.6;
+  letter-spacing: -0.011em;
+}
+
+@utility body-base {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  letter-spacing: -0.006em;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   STRUCTURE UTILITIES
+   ───────────────────────────────────────────────────────────── */
+
+@utility shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Exposed column grid. Plain CSS (not @utility) so it can carry its
+   own breakpoint — 4 columns on mobile, 12 from md up. The lines are
+   drawn as a repeating gradient so the count is exact at any width. */
+.grid-lines {
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--rule-soft) 0 1px,
+    transparent 1px calc(100% / 4)
+  );
+}
+
+@media (min-width: 768px) {
+  .grid-lines {
+    background-image: repeating-linear-gradient(
+      to right,
+      var(--rule-soft) 0 1px,
+      transparent 1px calc(100% / 12)
+    );
+  }
+}
+
+/* Sparse dot matrix. Decorative only — never sits behind text. */
+@utility dot-matrix {
+  background-image: radial-gradient(
+    circle at center,
+    var(--dot) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   MOTION
+   ───────────────────────────────────────────────────────────── */
+
+@keyframes mask-up {
+  from {
+    clip-path: inset(100% 0 0 0);
+    transform: translateY(0.18em);
+  }
+  to {
+    clip-path: inset(-20% 0 -20% 0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(24px);
   }
   to {
     opacity: 1;
@@ -31,34 +289,37 @@
   }
 }
 
-@keyframes blink {
-  0%,
-  49% {
-    opacity: 1;
-  }
-  50%,
-  100% {
+@keyframes pop-in {
+  from {
     opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
-html {
-  scroll-behavior: smooth;
+@keyframes rule-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
 }
 
-body {
-  background: var(--color-bg);
-  color: var(--color-ink);
-}
-
-::selection {
-  background: var(--color-accent);
-  color: var(--color-accent-ink);
-}
-
-:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 3px;
+/* The live-status pulse — the one place a dot is allowed to move. */
+@keyframes signal-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.82);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -70,7 +331,12 @@ body {
   *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
     transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
     scroll-behavior: auto !important;
   }
+  /* The hero's entrance keyframes use `both` fill, so collapsing their
+     duration above lands them on their final state rather than hiding
+     them. Scroll reveals opt out in JS via useReducedMotion. */
 }
