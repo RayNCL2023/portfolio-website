@@ -133,12 +133,4 @@ export const projects: Project[] = [
       interval: 500,
     },
   },
-  {
-    title: "Terminal Planet Collision Sim",
-    description:
-      "A team project to build a real-time 3D physics sim drawn entirely in ASCII in the terminal, where planets orbit, collide, merge and shatter.",
-    tags: ["Python", "Physics", "ASCII rendering"],
-    status: "planned",
-    github: "https://github.com/RayNCL2023/Terminal-Planet-Collision-Sim",
-  },
 ];
