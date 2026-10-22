@@ -11,7 +11,7 @@ export const profile = {
     "Building AI projects, running experiments, and figuring out what actually works.",
   bio: "I'm a recent First-Class Computer Science graduate from Newcastle University, starting an MSc in Advanced Computer Science at the University of Manchester. I'm interested in building practical AI applications, exploring new ideas, and learning by creating projects from scratch. This site is where I document that journey.",
   location: "Manchester, UK",
-  email: "debanjanr2019@gmail.com",
+  email: "debanjan.ray@postgrad.manchester.ac.uk",
   github: "https://github.com/RayNCL2023",
   linkedin: "https://www.linkedin.com/in/debanjan-ray-ai/",
   cvUrl: "/Debanjan-Ray-CV.pdf",
