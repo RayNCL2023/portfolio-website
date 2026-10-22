@@ -8,6 +8,7 @@ import Brackets from "./Brackets";
 import SectionMarker from "./SectionMarker";
 import CountUp from "./CountUp";
 import Reveal from "./Reveal";
+import ProjectMedia from "./ProjectMedia";
 
 const statusConfig: Record<ProjectStatus, { label: string; live: boolean }> = {
   shipped: { label: "shipped", live: false },
@@ -40,8 +41,18 @@ export default function Projects() {
             </h2>
           </Reveal>
 
+          {/* The active card's capture. Desktop only: on mobile the
+              rail isn't pinned, so each card carries its own still. */}
+          <Reveal delay={60} className="hidden lg:block">
+            <ProjectMedia
+              key={activeIndex}
+              project={projects[activeIndex]}
+              className="mt-10"
+            />
+          </Reveal>
+
           <Reveal delay={120}>
-            <div className="mt-14 border-t border-rule pt-6">
+            <div className="mt-10 border-t border-rule pt-6">
               <p className="label-sm text-ink-faint">INDEX</p>
 
               {/* The one number worth remembering in this section —
@@ -124,6 +135,10 @@ function ProjectCard({
         }}
       >
         <Brackets size={10} inset={8} />
+
+        {project.media && (
+          <ProjectMedia project={project} animate={false} className="mb-8 lg:hidden" />
+        )}
 
         {/* ── Card metadata strip ── */}
         <div className="flex items-center justify-between gap-4">

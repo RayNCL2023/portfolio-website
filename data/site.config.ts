@@ -40,6 +40,15 @@ export const skills = [
 
 export type ProjectStatus = "shipped" | "building" | "planned";
 
+// Screenshots live in public/projects/<slug>/. More than one frame plays
+// as a loop; a single frame is shown as a still.
+export type ProjectMedia = {
+  frames: string[];
+  alt: string;
+  // Milliseconds each frame stays on screen when looping.
+  interval?: number;
+};
+
 export type Project = {
   title: string;
   description: string;
@@ -47,38 +56,81 @@ export type Project = {
   status: ProjectStatus;
   github?: string;
   demo?: string;
+  media?: ProjectMedia;
 };
 
+const frames = (slug: string, count: number) =>
+  Array.from({ length: count }, (_, i) => `/projects/${slug}/${i + 1}.webp`);
+
 export const projects: Project[] = [
-  // {
-  //   title: "Project One",
-  //   description:
-  //     "A one-line, plain-English summary of what this project does and why it's interesting — written for a recruiter skimming, not a professor grading.",
-  //   tags: ["Python", "PyTorch"],
-  //   status: "shipped",
-  //   github: "https://github.com/your-username/project-one",
-  //   demo: "https://project-one.example.com",
-  // },
-  // {
-  //   title: "Project Two",
-  //   description:
-  //     "Same rule: what it does, what problem it solves, in one sentence a non-specialist friend would understand.",
-  //   tags: ["TypeScript", "Next.js"],
-  //   status: "building",
-  //   github: "https://github.com/your-username/project-two",
-  // },
-  // {
-  //   title: "Project Three",
-  //   description:
-  //     "Placeholder for what you're planning to build next — swap this out once it exists, or remove the card entirely.",
-  //   tags: ["Idea stage"],
-  //   status: "planned",
-  // },
-    {
-      title: "Top Secret Projects",
-      description:
-        "Still working on it - can't share details yet, but it's going to be awesome.",
-      tags: ["AI", "ML"],
-      status: "building",
+  {
+    title: "Bedrock: ICU Early Warning",
+    description:
+      "Warns ICU nurses hours before a patient deteriorates, scoring five risks every hour and beating the NHS's NEWS2 score at the same alarm rate. Runs entirely on IBM LinuxONE, so patient data never leaves the machine. Built for the IBM Z Datathon 2026.",
+    tags: ["TypeScript", "Python", "Snap ML", "IBM Granite"],
+    status: "shipped",
+    github:
+      "https://github.com/RayNCL2023/Manchester-Fried-Chicken_IBM-Z-Datathon-2026-Project",
+    demo: "https://ibmz2026.nitlix.com",
+    media: {
+      frames: frames("bedrock", 8),
+      alt: "Bedrock ward board replaying ICU beds hour by hour, with live alarms",
+      interval: 900,
     },
+  },
+  {
+    title: "Agent Flight Recorder",
+    description:
+      "Time-travel debugging for AI agents: replay, inspect, fork and compare every decision an LLM agent makes, from recorded traces that replay exactly the same way every time.",
+    tags: ["Python", "FastAPI", "TypeScript", "LLM observability"],
+    status: "building",
+    github: "https://github.com/RayNCL2023/AI-Agent-Flight-Recorder",
+    media: {
+      frames: frames("flight-recorder", 1),
+      alt: "Agent Flight Recorder timeline, step inspector and divergence panel for a recorded run",
+    },
+  },
+  {
+    title: "Synthetic Usability Lab",
+    description:
+      "Three AI personas, including a screen-reader user, browse a live site in parallel and return a ranked list of usability issues, each tied to the exact screenshot and reaction that caused it.",
+    tags: ["TypeScript", "Playwright", "Gemini", "Postgres"],
+    status: "shipped",
+    github: "https://github.com/RayNCL2023/Synthetic_Usability_Lab",
+  },
+  {
+    title: "Author-Context Idea Generation",
+    description:
+      "My First-Class dissertation: does grounding an LLM in a researcher's published papers, or pairing two researchers from distant fields, make it come up with better and more novel research ideas?",
+    tags: ["Python", "Gemini", "arXiv", "Statistics"],
+    status: "shipped",
+    github:
+      "https://github.com/RayNCL2023/Enhancing_Scientific_Idea_Generation_Dissertation",
+  },
+  {
+    title: "dissPICable",
+    description:
+      "Snap any object with your phone and it wakes up as a cheeky Mancunian character that rap-battles you, roasts your comebacks and remembers you next time. Built in a day at Hacktoberfest Hack Day Manchester.",
+    tags: ["JavaScript", "Gemma 4", "ElevenLabs", "Tone.js"],
+    status: "shipped",
+    github: "https://github.com/RayNCL2023/Object-Karaoke",
+    media: {
+      frames: frames("disspicable", 4),
+      alt: "dissPICable stage: a coffee mug character rap-battling the player",
+      interval: 1800,
+    },
+  },
+  {
+    title: "Rhythm - AI Beat Studio",
+    description:
+      "Tap out a rhythm on your keyboard and a local AI producer turns it into a full track with drums, bass, synths, a title and vocal ideas. No music knowledge needed. Built in a day at the Bradford Agentic AI Hackathon.",
+    tags: ["JavaScript", "Gemma 4", "Ollama", "Tone.js"],
+    status: "shipped",
+    github: "https://github.com/RayNCL2023/Rhythm-Beat-Studio-Hackathon",
+    media: {
+      frames: frames("rhythm", 4),
+      alt: "Rhythm studio playing an AI-produced track with drums, bass and pad layers",
+      interval: 500,
+    },
+  },
 ];
