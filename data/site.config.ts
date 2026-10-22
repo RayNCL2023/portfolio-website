@@ -40,6 +40,15 @@ export const skills = [
 
 export type ProjectStatus = "shipped" | "building" | "planned";
 
+// Screenshots live in public/projects/<slug>/. More than one frame plays
+// as a loop; a single frame is shown as a still.
+export type ProjectMedia = {
+  frames: string[];
+  alt: string;
+  // Milliseconds each frame stays on screen when looping.
+  interval?: number;
+};
+
 export type Project = {
   title: string;
   description: string;
@@ -47,7 +56,11 @@ export type Project = {
   status: ProjectStatus;
   github?: string;
   demo?: string;
+  media?: ProjectMedia;
 };
+
+const frames = (slug: string, count: number) =>
+  Array.from({ length: count }, (_, i) => `/projects/${slug}/${i + 1}.webp`);
 
 export const projects: Project[] = [
   {
@@ -59,6 +72,11 @@ export const projects: Project[] = [
     github:
       "https://github.com/RayNCL2023/Manchester-Fried-Chicken_IBM-Z-Datathon-2026-Project",
     demo: "https://ibmz2026.nitlix.com",
+    media: {
+      frames: frames("bedrock", 8),
+      alt: "Bedrock ward board replaying ICU beds hour by hour, with live alarms",
+      interval: 900,
+    },
   },
   {
     title: "Agent Flight Recorder",
@@ -67,6 +85,10 @@ export const projects: Project[] = [
     tags: ["Python", "FastAPI", "TypeScript", "LLM observability"],
     status: "building",
     github: "https://github.com/RayNCL2023/AI-Agent-Flight-Recorder",
+    media: {
+      frames: frames("flight-recorder", 1),
+      alt: "Agent Flight Recorder timeline, step inspector and divergence panel for a recorded run",
+    },
   },
   {
     title: "Synthetic Usability Lab",
@@ -92,6 +114,11 @@ export const projects: Project[] = [
     tags: ["JavaScript", "Gemma 4", "ElevenLabs", "Tone.js"],
     status: "shipped",
     github: "https://github.com/RayNCL2023/Object-Karaoke",
+    media: {
+      frames: frames("disspicable", 4),
+      alt: "dissPICable stage: a coffee mug character rap-battling the player",
+      interval: 1800,
+    },
   },
   {
     title: "Rhythm - AI Beat Studio",
@@ -100,6 +127,11 @@ export const projects: Project[] = [
     tags: ["JavaScript", "Gemma 4", "Ollama", "Tone.js"],
     status: "shipped",
     github: "https://github.com/RayNCL2023/Rhythm-Beat-Studio-Hackathon",
+    media: {
+      frames: frames("rhythm", 4),
+      alt: "Rhythm studio playing an AI-produced track with drums, bass and pad layers",
+      interval: 500,
+    },
   },
   {
     title: "Terminal Planet Collision Sim",
