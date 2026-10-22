@@ -7,8 +7,7 @@ import Brackets from "./Brackets";
 
 /**
  * Framed capture of a project. Several frames crossfade on a loop;
- * one frame is a still. Projects without captures get a quiet
- * placeholder so the frame never collapses as the reader scrolls.
+ * one frame is a still. Projects without captures render nothing.
  */
 export default function ProjectMedia({
   project,
@@ -22,7 +21,7 @@ export default function ProjectMedia({
 }) {
   const reduce = useReducedMotion();
   const media = project.media;
-  const frames = media ? (animate ? media.frames : media.frames.slice(0, 1)) : [];
+  const frames = !media ? [] : animate ? media.frames : media.frames.slice(0, 1);
   const looping = frames.length > 1 && !reduce;
   const [frame, setFrame] = useState(0);
 
@@ -35,6 +34,10 @@ export default function ProjectMedia({
     );
     return () => clearInterval(id);
   }, [looping, frames.length, media?.interval]);
+
+  if (!media) {
+    return null;
+  }
 
   return (
     <figure
@@ -50,7 +53,7 @@ export default function ProjectMedia({
           <img
             key={src}
             src={src}
-            alt={i === 0 ? media?.alt : ""}
+            alt={i === 0 ? media.alt : ""}
             aria-hidden={i !== 0}
             loading={i === 0 ? "eager" : "lazy"}
             decoding="async"
@@ -58,17 +61,10 @@ export default function ProjectMedia({
             style={{ opacity: i === frame ? 1 : 0 }}
           />
         ))}
-
-        {!media && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-center">
-            <span className="label-sm text-ink-faint">NO CAPTURE</span>
-            <span className="label-sm text-ink-muted">Source on GitHub</span>
-          </div>
-        )}
       </div>
 
       <figcaption className="mt-3 flex items-center justify-between gap-4 label-sm text-ink-faint">
-        <span>{media ? (looping ? "CAPTURE · LOOP" : "CAPTURE · STILL") : "—"}</span>
+        <span>{looping ? "CAPTURE · LOOP" : "CAPTURE · STILL"}</span>
         {looping && (
           <span>
             {String(frame + 1).padStart(2, "0")}/{String(frames.length).padStart(2, "0")}
