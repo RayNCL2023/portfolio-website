@@ -136,9 +136,7 @@ function ProjectCard({
       >
         <Brackets size={10} inset={8} />
 
-        {project.media && (
-          <ProjectMedia project={project} animate={false} className="mb-8 lg:hidden" />
-        )}
+        <ProjectMedia project={project} animate={false} className="mb-8 lg:hidden" />
 
         {/* ── Card metadata strip ── */}
         <div className="flex items-center justify-between gap-4">
