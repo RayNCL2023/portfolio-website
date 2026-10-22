@@ -1,4 +1,4 @@
-# Your Portfolio Site
+# Debanjan Ray's Portfolio site
 
 A single-page portfolio built with Next.js, TypeScript, and Tailwind CSS.
 Warm near-white base, one signal accent, exposed column grid.
