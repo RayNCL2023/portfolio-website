@@ -94,7 +94,7 @@ export const projects: Project[] = [
     github: "https://github.com/RayNCL2023/Object-Karaoke",
   },
   {
-    title: "AI Beat Studio",
+    title: "Rhythm - AI Beat Studio",
     description:
       "Tap out a rhythm on your keyboard and a local AI producer turns it into a full track with drums, bass, synths, a title and vocal ideas. No music knowledge needed. Built in a day at the Bradford Agentic AI Hackathon.",
     tags: ["JavaScript", "Gemma 4", "Ollama", "Tone.js"],
