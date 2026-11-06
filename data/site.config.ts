@@ -57,6 +57,8 @@ export type Project = {
   github?: string;
   demo?: string;
   media?: ProjectMedia;
+  // Prizes or placings, shown in the accent colour above the title.
+  awards?: string[];
 };
 
 const frames = (slug: string, count: number) =>
@@ -72,6 +74,7 @@ export const projects: Project[] = [
     github:
       "https://github.com/RayNCL2023/Manchester-Fried-Chicken_IBM-Z-Datathon-2026-Project",
     demo: "https://ibmz2026.nitlix.com",
+    awards: ["#1 in EMEA", "#2 in UK"],
     media: {
       frames: frames("bedrock", 8),
       alt: "Bedrock ward board replaying ICU beds hour by hour, with live alarms",
