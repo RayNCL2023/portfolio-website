@@ -163,7 +163,17 @@ function ProjectCard({
           </span>
         </div>
 
-        <h3 className="mt-8 display-3 text-ink">{project.title}</h3>
+        {project.awards && (
+          <p className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 label-sm text-accent">
+            {project.awards.map((award) => (
+              <span key={award}>★ {award}</span>
+            ))}
+          </p>
+        )}
+
+        <h3 className={`${project.awards ? "mt-3" : "mt-8"} display-3 text-ink`}>
+          {project.title}
+        </h3>
 
         <p className="mt-4 max-w-md body-base text-ink-muted">
           {project.description}
